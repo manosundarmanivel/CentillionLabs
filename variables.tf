@@ -14,6 +14,8 @@ variable "vpc_name" {
     "Name" = "vpc-rp-dev-mum-01"
   }
 }
+
+/*
 ####pub-sub
 
 variable "vpc_id" {
@@ -218,3 +220,5 @@ variable "tier" {
 variable "pub_subnet_id" {
   type = string
 }
+
+*/
