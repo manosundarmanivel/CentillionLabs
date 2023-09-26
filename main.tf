@@ -5,7 +5,7 @@ module "vpc" {
   vpc_cidr = var.vpc_cidr
   vpc_name = var.vpc_name
 }
-
+/*
 module "pub-sub-01" {
   source = "./modules/pub-sub-01"
   vpc_id = module.vpc.vpc_id
@@ -98,3 +98,5 @@ module "elastic_beanstalk" {
     pubpub_subnet_id = module.pub_subnet_id
   
 }
+
+*/
