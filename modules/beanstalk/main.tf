@@ -30,7 +30,7 @@ resource "aws_elastic_beanstalk_environment" "elbappenv" {
   setting {
     namespace  = "aws:ec2:vpc"
     name       = "Subnets"
-    value      = var.public_subnets
+    value      = var.pub_subnet_id
   }
 
   setting {
