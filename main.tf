@@ -95,6 +95,6 @@ module "elastic_beanstalk" {
     solution_stack_name = var.solution_stack_name
     tier = var.tier
     vpc_id = module.vpc.vpc_id
-    public_subnets = module.pub-sub-01.subnet_id
+    pubpub_subnet_id = module.pub_subnet_id
   
 }
