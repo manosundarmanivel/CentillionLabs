@@ -15,11 +15,12 @@ variable "vpc_name" {
   }
 }
 
-/*
+
 ####pub-sub
 
 variable "vpc_id" {
   type = string
+  default = "vpc-06f7b448c4ff418e1"
 }
 
 
@@ -35,6 +36,8 @@ variable "subnet_name" {
   }
 
 }
+
+/*
 ###############api-sub
 #variable "vpc_id" {
 #  type = string
