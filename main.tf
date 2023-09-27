@@ -54,7 +54,7 @@ module "security-group" {
     sg_name = var.sg_name
   
 }
-/*
+
 module "pub-s3-01" {
     source = "./modules/pub-s3-01"
     bucket  = var.bucket
@@ -88,6 +88,8 @@ module "prv_s3_02" {
   
 }
 
+
+/*
 
 module "elastic_beanstalk" {
     source = "./modules/beanstalk"
