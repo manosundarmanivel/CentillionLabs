@@ -115,7 +115,7 @@ variable "sg_name" {
   }
 }
 
-/*
+
 ########pub-s3-01(web)
 
 variable "bucket" {
@@ -199,6 +199,8 @@ variable "s3_name_data" {
   
 }
 
+
+/*
 #############Beanstalk (web app)
 
 variable "elb_name" {
