@@ -5,7 +5,7 @@ module "vpc" {
   vpc_cidr = var.vpc_cidr
   vpc_name = var.vpc_name
 }
-/*
+
 module "pub-sub-01" {
   source = "./modules/pub-sub-01"
   vpc_id = module.vpc.vpc_id
@@ -13,7 +13,7 @@ module "pub-sub-01" {
   subnet_name = var.subnet_name
   
 }
-
+/*
 module "api-sub-01" {
     source = "./modules/api-sub-01"
     vpc_id = module.vpc.vpc_id

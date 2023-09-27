@@ -15,7 +15,7 @@ variable "vpc_name" {
   }
 }
 
-/*
+
 ####pub-sub
 
 variable "vpc_id" {
@@ -35,6 +35,8 @@ variable "subnet_name" {
   }
 
 }
+
+/*
 ###############api-sub
 #variable "vpc_id" {
 #  type = string
