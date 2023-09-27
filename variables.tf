@@ -37,7 +37,7 @@ variable "subnet_name" {
 
 }
 
-/*
+
 ###############api-sub
 #variable "vpc_id" {
 #  type = string
@@ -115,6 +115,7 @@ variable "sg_name" {
   }
 }
 
+/*
 ########pub-s3-01(web)
 
 variable "bucket" {

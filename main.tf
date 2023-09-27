@@ -13,7 +13,7 @@ module "pub-sub-01" {
   subnet_name = var.subnet_name
   
 }
-/*
+
 module "api-sub-01" {
     source = "./modules/api-sub-01"
     vpc_id = module.vpc.vpc_id
@@ -54,7 +54,7 @@ module "security-group" {
     sg_name = var.sg_name
   
 }
-
+/*
 module "pub-s3-01" {
     source = "./modules/pub-s3-01"
     bucket  = var.bucket
