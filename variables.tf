@@ -20,6 +20,7 @@ variable "vpc_name" {
 
 variable "vpc_id" {
   type = string
+  default = "vpc-06f7b448c4ff418e1"
 }
 
 
