@@ -1,3 +1,4 @@
+
 terraform {
    backend "s3" {
       bucket = "tf-states-qa"
@@ -5,6 +6,7 @@ terraform {
       region = "ap-south-1"
    }
 }
+
 
 resource "aws_iam_role" "lambda_role" {
   name = "lambda_rp_s3_qa"
