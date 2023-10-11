@@ -72,14 +72,14 @@ resource "aws_lambda_function" "terraform_lambda_func" {
 
 environment {
     variables = {
-        bucket_name = "pubs3-rp-rawdata-mum-dev-01"
-        cleansing_mapping_json = "s3://pubs3-rp-rawdata-mum-dev-01/configs/cleanser.json"
-        custom_value_mapping_json = "s3://pubs3-rp-rawdata-mum-dev-01/configs/custom_value_mapping.json"
-        customer_cleansed_data  = "s3://pubs3-rp-rawdata-mum-dev-01/cleansed_data/"
-        customer_raw_data  = "s3://pubs3-rp-rawdata-mum-dev-01/raw-data/"
-        field_mapping_json  = "s3://pubs3-rp-rawdata-mum-dev-01/configs/customer_field_mapping.json"
-        source_path_1  = "s3://pubs3-rp-rawdata-mum-dev-01/raw-data/"
-        step_fn_arn  = "arn:aws:states:ap-south-1:973713214519:stateMachine:step_fun_rp_mum-dev-01"
+        bucket_name = "s3-src-rp-mum-qa-01"
+        cleansing_mapping_json = "s3://s3-src-rp-mum-qa-01/configs/cleanser.json"
+        custom_value_mapping_json = "s3://s3-src-rp-mum-qa-01/configs/custom_value_mapping.json"
+        customer_cleansed_data  = "s3://s3-dest-rp-mum-qa-01/cleansed_customer_data/"
+        customer_raw_data  = "s3://s3-src-rp-mum-qa-01/raw-data/"
+        field_mapping_json  = "s3://s3-src-rp-mum-qa-01/configs/customer_field_mapping.json"
+        source_path_1  = "s3://s3-src-rp-mum-qa-01/raw-data/"
+        #step_fn_arn  = "arn:aws:states:ap-south-1:973713214519:stateMachine:step_fun_rp_mum-dev-01"
         #target_path_1 = "s3://pubs3-rp-rawdata-mum-dev-01/standard_output/"
     }
   }
@@ -88,7 +88,7 @@ environment {
 }
 
 data "aws_s3_bucket" "input-bucket" {
-  bucket = "pubs3-rp-rawdata-mum-dev-01"
+  bucket = "s3-src-rp-mum-qa-01"
 }
 
 resource "aws_s3_bucket_notification" "s3-trigger-lambda" {
