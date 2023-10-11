@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Action": [
+                "s3-object-lambda:Get*",
+                "s3-object-lambda:List*",
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::pubs3-rp-rawdata-mum-dev-01/*",
+                "arn:aws:s3:::prvs3-rp-data-mum-dev-01/*"
+            ]
+        }
+    ]
+}
