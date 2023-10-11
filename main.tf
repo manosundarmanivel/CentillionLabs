@@ -89,19 +89,19 @@ environment {
 
 }
 
-data "aws_s3_bucket" "input-bucket" {
-  bucket = "s3-src-rp-mum-qa-01"
-}
+# data "aws_s3_bucket" "input-bucket" {
+#   bucket = "s3-src-rp-mum-qa-01"
+# }
 
-resource "aws_s3_bucket_notification" "s3-trigger-lambda" {
-  bucket =  data.aws_s3_bucket.input-bucket.id
+# resource "aws_s3_bucket_notification" "s3-trigger-lambda" {
+#   bucket =  data.aws_s3_bucket.input-bucket.id
 
-  lambda_function {
-    lambda_function_arn = aws_lambda_function.terraform_lambda_func.arn
-    events              = ["s3:ObjectCreated:*"]
-    filter_suffix = ".csv"
-  }
-}
+#   lambda_function {
+#     lambda_function_arn = aws_lambda_function.terraform_lambda_func.arn
+#     events              = ["s3:ObjectCreated:*"]
+#     filter_suffix = ".csv"
+#   }
+# }
 
 # vpc_config {
 # 	    subnet_ids         = var.subnets
