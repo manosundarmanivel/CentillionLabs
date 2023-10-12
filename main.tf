@@ -62,6 +62,7 @@ data "aws_s3_bucket" "input-bucket" {
   role           = aws_iam_role.sftp_role.arn
   #home_directory = "/${s3-src-rp-mum-qa-01}/raw-data"
   home_directory = "/${data.aws_s3_bucket.input-bucket.arn}/raw-data"
+  restricted_home        = true
 } 
 
 #SSH key for user to manage sftp account
