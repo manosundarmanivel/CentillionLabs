@@ -1,3 +1,4 @@
+
  terraform {
    backend "s3" {
       bucket = "tf-states-qa"
@@ -27,6 +28,7 @@ resource "aws_iam_role" "sftp_role" {
 EOF
 }
 
+
 #Set SFTP user permissions.
 resource "aws_iam_policy" "sftp_s3" {
   name   = "sftp_s3_policy_qa"
@@ -48,7 +50,9 @@ resource "aws_transfer_server" "sftp_server" {
   }
 }
 
-#Import s3
+
+
+#import s3 bucket
 
 data "aws_s3_bucket" "input-bucket" {
   bucket = "s3-src-rp-mum-qa-01"
