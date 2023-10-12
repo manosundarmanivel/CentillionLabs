@@ -71,7 +71,7 @@ resource "aws_sfn_state_machine" "sfn_state_machine" {
       "Type": "Task",
       "Resource": "arn:aws:states:::glue:startJobRun.sync",
       "Parameters": {
-        "JobName": "data_std_job",
+        "JobName": "glue-rp-mum-qa-01",
         "Arguments": {
           "--JOB1_SOURCE_PATH.$": "$.job1_source_path",
           "--CUSTOMER_RAW_DATA.$": "$.customer_raw_data",
