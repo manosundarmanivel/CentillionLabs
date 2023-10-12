@@ -1,3 +1,4 @@
+
   terraform {
    backend "s3" {
       bucket = "tf-states-qa"
@@ -24,6 +25,7 @@ resource "aws_iam_role" "glue_role" {
 }
 EOF
 }
+
 
 #custom policy
 resource "aws_iam_policy" "glue_s3" {
