@@ -12,8 +12,8 @@
                 "s3:DeleteObject"
             ],
             "Resource": [
-                "arn:aws:s3:::pubs3-rp-rawdata-mum-dev-01/*",
-                "arn:aws:s3:::prvs3-rp-data-mum-dev-01/*"
+                "arn:aws:s3:::s3-src-rp-mum-qa-01/*",
+                "arn:aws:s3:::s3-dest-rp-mum-qa-01/*"
             ]
         }
     ]

@@ -41,7 +41,7 @@ resource "aws_iam_role_policy_attachment" "glue_s3_attch" {
 #import s3 bucket
 
 data "aws_s3_bucket" "input-bucket" {
-  bucket = "pubs3-rp-rawdata-mum-dev-01"
+  bucket = "s3-src-rp-mum-qa-01"
 }
 
 #Glue job
@@ -49,8 +49,8 @@ resource "aws_glue_job" "my_job_resource" {
     name     = "glue-rp-mum-qa-01"
     role_arn = aws_iam_role.glue_role.arn
     command {
-        name            = "glueetl1"
-        script_location = "s3://pubs3-rp-rawdata-mum-dev-01/scripts/"
+        name            = "glueetl-qa-01"
+        script_location = "s3://s3-src-rp-mum-qa-01/scripts/"
         python_version  = "3"
     }
 
@@ -61,7 +61,7 @@ resource "aws_glue_job" "my_job_resource" {
     #"--enable-continuous-log-filter"     = "true"
     "--enable-metrics"                   = "true"
     "--enable-job-insights"              = "true"
-    "--extra-py-files"                   = "s3://pubs3-rp-rawdata-mum-dev-01/libraries/datastdlib-1.0.0-py3-none-any.whl"
+    "--extra-py-files"                   = "s3://s3-src-rp-mum-qa-01/libraries/datastdlib-1.0.0-py3-none-any.whl"
   }
 }
 
