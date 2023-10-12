@@ -1,96 +1,69 @@
 
- terraform {
+  terraform {
    backend "s3" {
       bucket = "tf-states-qa"
-      key = "step-fun-qa-001.state"
+      key = "glue-job-qa-001.state"
       region = "ap-south-1"
    }
-} 
+}  
 
-/* resource "aws_iam_role" "step_function_role" {
-  name               = "step-fun-role-qa"
+resource "aws_iam_role" "glue_role" {
+  name = "Glue_role_qa"
   assume_role_policy = <<EOF
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Action": "sts:AssumeRole",
-        "Principal": {
-          "Service": "states.amazonaws.com"
-        },
-        "Effect": "Allow",
-        "Sid": "StepFunctionAssumeRole"
-      }
-    ]
-  }
-  EOF
-} */
-
-/* resource "aws_iam_policy" "policy_invoke_lambda" {
-  name        = "stepFunctionSampleLambdaFunctionInvocationPolicy"
-  policy = <<EOF
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": [
-                "lambda:InvokeFunction",
-                "lambda:InvokeAsync"
-            ],
-            "Resource": "*"
-        }
-    ]
-}
-EOF
-}
-
-// Attach policy to IAM Role for Step Function
-resource "aws_iam_role_policy_attachment" "step_fun_invoke_lambda" {
-  role       = aws_iam_role.step_function_role.name
-  policy_arn = aws_iam_policy.policy_invoke_lambda.arn
-} */
-
-#Import existing step function role
-data "aws_iam_role" "step_fun_role_qa" {
-name = "StepFunctions-step_fun_rp_mum-dev-01-role-jy6xk4xm5"
-}
-
-
-// Create state machine for step function
-resource "aws_sfn_state_machine" "sfn_state_machine" {
-  name     = "step_fun_rp_mum-qa-01"
-  role_arn = data.aws_iam_role.step_fun_role_qa.arn
-
-  definition = <<EOF
-
-{
-  "StartAt": "Glue_Start_Job1_Run",
-  "States": {
-    "Glue_Start_Job1_Run": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::glue:startJobRun.sync",
-      "Parameters": {
-        "JobName": "glue-rp-mum-qa-01",
-        "Arguments": {
-          "--JOB1_SOURCE_PATH.$": "$.job1_source_path",
-          "--CUSTOMER_RAW_DATA.$": "$.customer_raw_data",
-          "--CUSTOMER_CLEANSED_DATA.$": "$.customer_cleansed_data",
-          "--FIELD_MAPPING_JSON.$": "$.field_mapping_json",
-          "--CLEANSING_MAPPING_JSON.$": "$.cleansing_mapping_json",
-          "--CUSTOM_VALUE_MAPPING_JSON.$": "$.custom_value_mapping_json",
-          "--BUCKET_NAME.$": "$.bucket_name"
-        }
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "glue.amazonaws.com"
       },
-      "ResultPath": null,
-      "End": true
+      "Effect": "Allow",
+      "Sid": ""
     }
-  },
-  "Comment": "Triggers glue job for data standardization when customer file is uploaded to source s3 bucket"
+  ]
 }
 EOF
-
-  #depends_on = ["aws_lambda_function.Glue_Start_Job1_Run","aws_lambda_function.Glue_Start_Job1_Run"]
-
 }
+
+
+#custom policy
+resource "aws_iam_policy" "glue_s3" {
+  name   = "glue_policy_limit_s3_qa"
+  policy = file("glue_policy_limit_s3.json")
+}
+
+
+#Policy attachment
+resource "aws_iam_role_policy_attachment" "glue_s3_attch" {
+  role       = aws_iam_role.glue_role.name
+  policy_arn = aws_iam_policy.glue_s3.arn
+}
+
+#import s3 bucket
+
+data "aws_s3_bucket" "input-bucket" {
+  bucket = "s3-src-rp-mum-qa-01"
+}
+
+#Glue job
+resource "aws_glue_job" "my_job_resource" {
+    name     = "glue-rp-mum-qa-01"
+    role_arn = aws_iam_role.glue_role.arn
+    command {
+        name            = "glueetl-qa-01"
+        script_location = "s3://s3-src-rp-mum-qa-01/scripts/"
+        python_version  = "3"
+    }
+
+    default_arguments = {
+    # ... potentially other arguments ...
+    #"--continuous-log-logGroup"          = aws_cloudwatch_log_group.example.name
+    "--enable-continuous-cloudwatch-log" = "true"
+    #"--enable-continuous-log-filter"     = "true"
+    "--enable-metrics"                   = "true"
+    "--enable-job-insights"              = "true"
+    "--extra-py-files"                   = "s3://s3-src-rp-mum-qa-01/libraries/datastdlib-1.0.0-py3-none-any.whl"
+  }
+}
+
