@@ -50,9 +50,10 @@ data "aws_s3_bucket" "input-bucket" {
 resource "aws_glue_job" "my_job_resource" {
     name     = "glue-rp-mum-qa-01"
     role_arn = aws_iam_role.glue_role.arn
+    glue_version      = "4.0"
     command {
         name            = "glueetl-qa-01"
-        script_location = "s3://s3-src-rp-mum-qa-01/scripts/"
+        script_location = "s3://s3-src-rp-mum-qa-01/scripts/data_std_main.py"
         python_version  = "3"
     }
 
