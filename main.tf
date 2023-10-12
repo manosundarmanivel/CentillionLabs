@@ -44,18 +44,25 @@ resource "aws_transfer_server" "sftp_server" {
   logging_role           = aws_iam_role.sftp_role.arn
 
   tags = {
-    Name        = "sftp-qa-01"
+    Name        = "sftp-rp-mum-qa-01"
   }
 }
 
+#Import s3
+
+data "aws_s3_bucket" "input-bucket" {
+  bucket = "s3-src-rp-mum-qa-01"
+}
+
 #create sftp user 
-/* resource "aws_transfer_user" "ftp_user" {
+ resource "aws_transfer_user" "ftp_user" {
   #depends_on     = [aws_s3_bucket.b]
   server_id      = aws_transfer_server.sftp_server.id
-  user_name      = user1
+  user_name      = "rapport-qa"
   role           = aws_iam_role.sftp_role.arn
-  home_directory = "/${pubs3-rp-rawdata-mum-dev-01}/*"
-} */
+  #home_directory = "/${s3-src-rp-mum-qa-01}/raw-data"
+  home_directory = "/${data.aws_s3_bucket.input-bucket.arn}/raw-data"
+} 
 
 #SSH key for user to manage sftp account
 #Generate SSH key using PuttyGen

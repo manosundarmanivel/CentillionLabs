@@ -7,7 +7,7 @@
                 "s3:GetBucketLocation"
             ],
             "Resource": [
-                "arn:aws:s3:::pubs3-rp-rawdata-mum-dev-01"
+                "arn:aws:s3:::s3-src-rp-mum-qa-01"
             ],
             "Effect": "Allow",
             "Sid": "ReadWriteS3"
@@ -23,7 +23,7 @@
                 "s3:PutObjectACL"
             ],
             "Resource": [
-                "arn:aws:s3:::pubs3-rp-rawdata-mum-dev-01/*"
+                "arn:aws:s3:::s3-src-rp-mum-qa-01/*"
             ],
             "Effect": "Allow",
             "Sid": ""
