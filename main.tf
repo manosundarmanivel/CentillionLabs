@@ -64,8 +64,9 @@ data "aws_s3_bucket" "input-bucket" {
   server_id      = aws_transfer_server.sftp_server.id
   user_name      = "rapport-qa"
   role           = aws_iam_role.sftp_role.arn
+  home_directory     = "s3-src-rp-mum-qa-01/raw-data"
   #home_directory = "/${s3-src-rp-mum-qa-01}/raw-data"
-  home_directory = "/${data.aws_s3_bucket.input-bucket.arn}/raw-data"
+  #home_directory = "/${data.aws_s3_bucket.input-bucket.arn}/raw-data"
  # home_directory_restricted = true 
 } 
 
