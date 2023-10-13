@@ -1,0 +1,13 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "states:StartExecution",
+            "Resource": [
+                "arn:aws:states:ap-south-1:973713214519:stateMachine:step_fun_rp_mum-qa-01"
+            ]
+        }
+    ]
+}
