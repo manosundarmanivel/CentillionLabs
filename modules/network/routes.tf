@@ -7,7 +7,7 @@ resource "aws_route_table" "public-a" {
   }
 
   tags = {
-    name        = "public-a"
+    name        = "pubrt-rp-${var.short_region_name}-${var.environment}-01"
     environment = "${var.environment}"
   }
 }
@@ -45,7 +45,7 @@ resource "aws_route_table" "private-a" {
   }
 
   tags = {
-    name        = "private-a"
+    name        = "prirt-rp-${var.short_region_name}-${var.environment}-01"
     environment = "${var.environment}"
   }
 }

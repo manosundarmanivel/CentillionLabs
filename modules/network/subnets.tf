@@ -5,7 +5,7 @@ resource "aws_subnet" "public-a" {
   map_public_ip_on_launch = true
 
   tags = {
-    name        = "pubsub-rp-eus-dev-01"
+    name        = "pubsub-rp-${var.short_region_name}-${var.environment}-01"
     environment = "${var.environment}"
   }
 }
@@ -28,7 +28,7 @@ resource "aws_subnet" "private-a" {
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
 
   tags = {
-    name        = "apisub-rp-eus-dev-01"
+    name        = "apisub-rp-${var.short_region_name}-${var.environment}-01"
     environment = "${var.environment}"
   }
 }
@@ -39,7 +39,7 @@ resource "aws_subnet" "private-b" {
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
 
   tags = {
-    name        = "datasub-rp-eus-dev-01"
+    name        = "datasub-rp-${var.short_region_name}-${var.environment}-01"
     environment = "${var.environment}"
   }
 }
@@ -50,7 +50,7 @@ resource "aws_subnet" "private-c" {
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
 
   tags = {
-    name        = "dbsub-rp-eus-dev-01"
+    name        = "dbsub-rp-${var.short_region_name}-${var.environment}-01"
     environment = "${var.environment}"
   }
 }

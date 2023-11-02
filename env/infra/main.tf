@@ -19,7 +19,8 @@ terraform {
 module "network" {
   source = "../../modules/network"
 
-  environment = "${var.environment}"
+  environment       = "${var.environment}"
+  short_region_name = "${var.short_region_name}"
 }
 
 # output "web-alb-dns-name" {

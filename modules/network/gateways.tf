@@ -7,7 +7,7 @@ resource "aws_nat_gateway" "nat-a" {
   subnet_id     = "${aws_subnet.public-a.id}"
 }
 
-resource "aws_nat_gateway" "nat-b" {
-  allocation_id = "${aws_eip.nat-b.id}"
-  subnet_id     = "${aws_subnet.public-b.id}"
-}
+# resource "aws_nat_gateway" "nat-b" {
+#   allocation_id = "${aws_eip.nat-b.id}"
+#   subnet_id     = "${aws_subnet.public-b.id}"
+# }
