@@ -1,5 +1,5 @@
 resource "aws_eip" "nat-a" {
-  vpc = true
+  domain = "vpc"
 }
 
 # resource "aws_eip" "nat-b" {

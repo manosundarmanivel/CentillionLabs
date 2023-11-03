@@ -11,10 +11,9 @@ module "storage" {
 }
 
 module "lambda" {
-  source = "./modules/data-pipeline/lambda"
+  source = "./modules/lambda"
 
   environment = "${var.environment}"
-  short_region_name = "${var.short_region_name}"
 }
 
 # module "beanstalk" {
