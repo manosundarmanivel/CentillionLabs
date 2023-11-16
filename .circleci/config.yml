@@ -8,6 +8,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install AWS CLI
+          command: |
+            apt-get update
+            apt-get install -y awscli
+      - run:
           name: AWS CLI Configuration
           command: |
             aws configure set aws_access_key_id $TF_VAR_access_key
