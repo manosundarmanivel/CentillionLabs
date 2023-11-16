@@ -73,7 +73,7 @@ jobs:
           command: |
             cd env/infra
             terraform init
-            terraform apply --auto-approve
+            terraform destroy --auto-approve
 
 # -var-file="${ENV}.tfvars" --auto-approve
 workflows:
