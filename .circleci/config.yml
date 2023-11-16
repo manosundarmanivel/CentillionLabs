@@ -53,4 +53,4 @@ workflows:
             - terraform_plan
           filters:
              branches:
-                only: main
+                only: dev
