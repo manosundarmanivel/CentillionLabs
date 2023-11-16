@@ -4,35 +4,38 @@ jobs:
   terraform_init:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: ~/Rapport_Infra/env/infra
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
           name: Terraform Init
-          command:
+          command: |
+              cd env/infra
               terraform init
 
   terraform_plan:
       docker:
         - image: hashicorp/terraform:latest
-      working_directory: ~/Rapport_Infra/env/infra
+      working_directory: ~/repo
       steps:
         - checkout
         - run:
             name: Terraform Plan
             command: |
+              cd env/infra
               terraform init
               terraform plan
 
   terraform_apply_output:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: ~/env/infra
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
           name: Terraform Apply & Output
           command: |
+            cd env/infra
             terraform init
             terraform apply --auto-approve
 
