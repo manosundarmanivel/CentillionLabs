@@ -17,27 +17,36 @@ module "network" {
   short_region_name = var.short_region_name
 }
 
-module "storage" {
-  source = "../../modules/storage"
+# module "storage" {
+#   source = "../../modules/storage"
 
-  environment       = var.environment
+#   environment       = var.environment
+#   short_region_name = var.short_region_name
+# }
+
+# module "lambda" {
+#   source = "../../modules/lambda"
+
+#   environment       = var.environment
+#   short_region_name = var.short_region_name
+# }
+
+# module "glue" {
+#   source = "../../modules/glue"
+
+#   environment       = var.environment
+#   short_region_name = var.short_region_name
+#   job_file          = var.job_file
+# }
+
+module "bastion_host" {
+  source            = "../../modules/bastion_host"
+  environment      = var.environment
   short_region_name = var.short_region_name
+  aws_region = var.region
+  instance_type = var.instance_type
 }
 
-module "lambda" {
-  source = "../../modules/lambda"
-
-  environment       = var.environment
-  short_region_name = var.short_region_name
-}
-
-module "glue" {
-  source = "../../modules/glue"
-
-  environment       = var.environment
-  short_region_name = var.short_region_name
-  job_file          = var.job_file
-}
 
 
 
