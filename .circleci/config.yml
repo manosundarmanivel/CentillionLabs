@@ -4,7 +4,7 @@ jobs:
   terraform_init:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: ~/env/infra
+    working_directory: ~/Rapport_Infra/env/infra
     steps:
       - checkout
       - run:
@@ -15,7 +15,7 @@ jobs:
   terraform_plan:
       docker:
         - image: hashicorp/terraform:latest
-      working_directory: ~/env/infra
+      working_directory: ~/Rapport_Infra/env/infra
       steps:
         - checkout
         - run:
