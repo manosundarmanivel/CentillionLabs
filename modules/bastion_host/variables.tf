@@ -2,10 +2,15 @@ variable "environment" {}
 variable "short_region_name" {}
 variable "aws_region" {}
 variable "instance_type" {}
-
+variable "vpc_sg" {}
+variable "sub_pub" {}
 
 variable "public_key" {
-  default = "~/.ssh/bastion_key_devgi.pub"
+  default = "~/.ssh/bastion_key_dev.pub"
+}
+
+variable "private_key" {
+  default = "~/.ssh/bastion_key_dev"
 }
 
 variable "amis" {

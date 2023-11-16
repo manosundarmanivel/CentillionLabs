@@ -2,6 +2,10 @@ output "vpc-id" {
   value = "${aws_vpc.main.id}"
 }
 
+output "vpc" {
+  value = "${aws_vpc.main}"
+}
+
 output "vpc-cidr-block" {
   value = "${aws_vpc.main.cidr_block}"
 }

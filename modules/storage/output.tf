@@ -2,6 +2,10 @@ output "web_s3_01_arn" {
     value = "${aws_s3_bucket.pub-s3-01.arn}"
 }
 
+output "web_s3_01" {
+    value = "${aws_s3_bucket.pub-s3-01}"
+}
+
 output "web_s3_01_id" {
     value = "${aws_s3_bucket.pub-s3-01.id}"
 }
