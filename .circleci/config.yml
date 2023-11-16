@@ -23,7 +23,7 @@ jobs:
           command: |
               cd env/infra
               terraform init
-              terraform plan
+              
 
   terraform_plan:
       docker:
@@ -31,6 +31,17 @@ jobs:
       working_directory: ~/repo
       steps:
         - checkout
+        - run:
+          name: Install AWS CLI
+          command: |
+            apk update
+            apk add --no-cache aws-cli
+        - run:
+          name: AWS CLI Configuration
+          command: |
+            aws configure set aws_access_key_id $TF_VAR_access_key
+            aws configure set aws_secret_access_key $TF_VAR_secret_key
+            aws configure set default.region ap-south-1
         - run:
             name: Terraform Plan
             command: |
