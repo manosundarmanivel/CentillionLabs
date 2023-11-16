@@ -24,7 +24,7 @@ jobs:
               cd env/infra
               terraform init
               terraform plan
-              terraform apply --auto-approve
+              terraform destroy
               
 
   terraform_plan:
