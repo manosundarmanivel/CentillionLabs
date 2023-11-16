@@ -19,12 +19,12 @@ module "network" {
   short_region_name = var.short_region_name
 }
 
-# module "storage" {
-#   source = "../../modules/storage"
+module "storage" {
+  source = "../../modules/storage"
 
-#   environment       = var.environment
-#   short_region_name = var.short_region_name
-# }
+  environment       = var.environment
+  short_region_name = var.short_region_name
+}
 
 # module "lambda" {
 #   source = "../../modules/lambda"
@@ -58,7 +58,7 @@ module "kms" {
 
 module "sftp" {
   source = "../../modules/sftp"
-  # depends_on = [module.storage.web_s3_01, module.network.vpc]
+  depends_on = [module.storage.web_s3_01, module.network.vpc]
   environment       = var.environment
   short_region_name = var.short_region_name
   vpc_id = module.network.vpc-id
