@@ -1,6 +1,7 @@
 version: 2.1
 
 jobs:
+  
   terraform_init:
     docker:
       - image: hashicorp/terraform:latest
@@ -23,22 +24,32 @@ jobs:
           command: |
               cd env/infra
               terraform init
-              terraform plan
-              terraform destroy --auto-approve
+             
               
 
   terraform_plan:
-      docker:
-        - image: hashicorp/terraform:latest
-      working_directory: ~/repo
-      steps:
-        - checkout
-        - run:
-            name: Terraform Plan
-            command: |
-              cd env/infra
-              terraform init
-              terraform plan
+    docker:
+      - image: hashicorp/terraform:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install AWS CLI
+          command: |
+            apk update
+            apk add --no-cache aws-cli
+      - run:
+          name: AWS CLI Configuration
+          command: |
+            aws configure set aws_access_key_id $TF_VAR_access_key
+            aws configure set aws_secret_access_key $TF_VAR_secret_key
+            aws configure set default.region ap-south-1
+      - run:
+          name: Terraform Plan
+          command: |
+            cd env/infra
+            terraform init
+            terraform plan
 
   terraform_apply_output:
     docker:
@@ -46,6 +57,17 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - run:
+          name: Install AWS CLI
+          command: |
+            apk update
+            apk add --no-cache aws-cli
+      - run:
+          name: AWS CLI Configuration
+          command: |
+            aws configure set aws_access_key_id $TF_VAR_access_key
+            aws configure set aws_secret_access_key $TF_VAR_secret_key
+            aws configure set default.region ap-south-1
       - run:
           name: Terraform Apply & Output
           command: |
