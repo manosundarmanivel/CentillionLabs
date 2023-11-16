@@ -27,7 +27,7 @@ jobs:
   terraform_apply_output:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: ~/repo
+    working_directory: ~/env/infra
     steps:
       - checkout
       - run:
