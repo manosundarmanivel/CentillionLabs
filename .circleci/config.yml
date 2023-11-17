@@ -17,8 +17,8 @@ jobs:
       - persist_to_workspace:
           root: /workspace
           paths:
-            - /usr/bin/aws
-            - ~/.aws
+            - /root/.aws
+
   
   terraform_init:
     docker:
