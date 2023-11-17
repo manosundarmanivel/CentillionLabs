@@ -5,6 +5,7 @@ jobs:
   install_aws_cli:
     docker:
       - image: amazonlinux:2
+    working_directory: ~/repo
     steps:
       - run:
           name: Install required packages
@@ -16,11 +17,15 @@ jobs:
             aws configure set aws_access_key_id $TF_VAR_access_key
             aws configure set aws_secret_access_key $TF_VAR_secret_key
             aws configure set default.region ap-south-1
+      - run:
+          name: Create .aws directory
+          command: mkdir /config/.aws
+
       - persist_to_workspace:
-          root: ~/repo
+          root: /workspace/.aws
           paths:
-            - /usr/bin/aws
-            - ~/.aws
+            - '*'
+            - 
 
   
   terraform_init:
@@ -30,7 +35,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /workspace/.aws
+          at: ~repo/workspace/
       - run:
           name: Terraform Init
           command: |
