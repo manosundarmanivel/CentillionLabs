@@ -9,7 +9,6 @@ jobs:
       - run:
           name: Install AWS CLI
           command: |
-            yum update
             yum install -y aws-cli
             aws configure set aws_access_key_id $TF_VAR_access_key
             aws configure set aws_secret_access_key $TF_VAR_secret_key
