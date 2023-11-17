@@ -1,7 +1,5 @@
 provider "aws" {
   region = var.region
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
 }
 
 terraform {
@@ -65,6 +63,18 @@ module "sftp" {
   vpc_id            = module.network.vpc-id
   sg_id             = module.network.sg-id
   s3_bucket         = module.storage.web_s3_01.bucket
+}
+
+
+module "api_gateway" {
+  source = "../../modules/api_gateway"
+  depends_on = [module.network.vpc]
+  region = var.region
+  environment = var.environment
+  short_region_name = var.short_region_name
+  vpc_id = module.network.vpc-id
+  sg_id = module.network.sg-id
+  pub_subnet_id = module.network.public-a-subnet-id
 }
 
 # module "beanstalk" {
