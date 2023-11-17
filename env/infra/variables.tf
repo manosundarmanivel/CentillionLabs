@@ -13,3 +13,9 @@ variable "job_file" {
 variable "instance_type" {
     default = "t2.micro"
 }
+variable "secret_key" {
+  
+}
+variable "access_key" {
+  
+}
