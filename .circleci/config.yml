@@ -9,8 +9,8 @@ jobs:
       - run:
           name: Install AWS CLI
           command: |
-            apk update
-            apk add --no-cache aws-cli
+            yum update
+            yum install -y aws-cli
             aws configure set aws_access_key_id $TF_VAR_access_key
             aws configure set aws_secret_access_key $TF_VAR_secret_key
             aws configure set default.region ap-south-1
