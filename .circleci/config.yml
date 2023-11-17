@@ -29,7 +29,7 @@ jobs:
   terraform_init:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: /workspace
+    working_directory: /workspace/.aws
     steps:
       - checkout
       - attach_workspace:
