@@ -17,7 +17,7 @@ jobs:
             aws configure set aws_secret_access_key $TF_VAR_secret_key
             aws configure set default.region ap-south-1
       - persist_to_workspace:
-          root: /
+          root: ~/repo
           paths:
             - .aws
 
