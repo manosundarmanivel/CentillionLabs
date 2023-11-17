@@ -16,12 +16,8 @@ jobs:
             aws configure set aws_access_key_id $TF_VAR_access_key
             aws configure set aws_secret_access_key $TF_VAR_secret_key
             aws configure set default.region ap-south-1
-      - run:
-          name: Create .aws directory
-          command: mkdir -p /workspace/.aws
-
       - persist_to_workspace:
-          root: /
+          root: ~/repo
           paths:
             - /usr/bin/aws
             - ~/.aws
