@@ -1,2 +1,6 @@
-variable "environment" {}
-variable "short_region_name" {}
+variable "environment" {
+  type = string
+}
+variable "short_region_name" {
+  type = string
+}

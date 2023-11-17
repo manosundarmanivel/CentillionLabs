@@ -1,7 +1,5 @@
 provider "aws" {
   region = var.region
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
 }
 
 terraform {
@@ -15,6 +13,7 @@ terraform {
 module "network" {
   source = "../../modules/network"
 
+  region            = var.region
   environment       = var.environment
   short_region_name = var.short_region_name
 }
@@ -58,12 +57,12 @@ module "kms" {
 
 module "sftp" {
   source = "../../modules/sftp"
-  depends_on = [module.storage.web_s3_01, module.network.vpc]
+  # depends_on = [module.storage.web_s3_01, module.network.vpc]
   environment       = var.environment
   short_region_name = var.short_region_name
-  vpc_id = module.network.vpc-id
-  sg_id = module.network.sg-id
-  s3_bucket = module.storage.web_s3_01.bucket
+  vpc_id            = module.network.vpc-id
+  sg_id             = module.network.sg-id
+  s3_bucket         = module.storage.web_s3_01.bucket
 }
 
 # module "beanstalk" {
