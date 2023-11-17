@@ -33,7 +33,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /workspace
+          at: /workspace/.aws
       - run:
           name: Terraform Init
           command: |
