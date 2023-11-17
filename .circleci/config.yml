@@ -2,74 +2,78 @@ version: 2.1
 
 jobs:
 
-  install_aws_cli:
+  
+  terraform_init:
     docker:
-      - image: amazonlinux:2
+      - image: hashicorp/terraform:latest
     working_directory: ~/repo
     steps:
-      - run:
-          name: Install required packages
-          command: |
-            yum install -y aws-cli tar gzip
+      - checkout
       - run:
           name: Install AWS CLI
+          command: |
+            apk update
+            apk add --no-cache aws-cli
+      - run:
+          name: AWS CLI Configuration
           command: |
             aws configure set aws_access_key_id $TF_VAR_access_key
             aws configure set aws_secret_access_key $TF_VAR_secret_key
             aws configure set default.region ap-south-1
       - run:
-          name: Create .aws directory
-          command: mkdir /config/.aws
-
-      - persist_to_workspace:
-          root: /workspace/.aws
-          paths:
-            - '*'
-            - 
-
-  
-  terraform_init:
-    docker:
-      - image: hashicorp/terraform:latest
-    working_directory: /workspace/.aws
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~repo/workspace/
-      - run:
           name: Terraform Init
           command: |
-            cd env/infra
-            terraform init
+              cd env/infra
+              terraform init
              
               
 
   terraform_plan:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: /workspace
+    working_directory: ~/repo
     steps:
       - checkout
-      - attach_workspace:
-          at: /workspace
+      - run:
+          name: Install AWS CLI
+          command: |
+            apk update
+            apk add --no-cache aws-cli
+      - run:
+          name: AWS CLI Configuration
+          command: |
+            aws configure set aws_access_key_id $TF_VAR_access_key
+            aws configure set aws_secret_access_key $TF_VAR_secret_key
+            aws configure set default.region ap-south-1
       - run:
           name: Terraform Plan
           command: |
             cd env/infra
+            terraform init
             terraform plan
 
   terraform_apply_output:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: /workspace
+    working_directory: ~/repo
     steps:
       - checkout
-      - attach_workspace:
-          at: /workspace
+      - run:
+          name: Install AWS CLI
+          command: |
+            apk update
+            apk add --no-cache aws-cli
+      - run:
+          name: AWS CLI Configuration
+          command: |
+            aws configure set aws_access_key_id $TF_VAR_access_key
+            aws configure set aws_secret_access_key $TF_VAR_secret_key
+            aws configure set default.region ap-south-1
       - run:
           name: Terraform Apply & Output
           command: |
             cd env/infra
+            terraform init
             terraform destroy --auto-approve
 
 # -var-file="${ENV}.tfvars" --auto-approve
@@ -77,16 +81,13 @@ workflows:
   version: 2
   Init-Apply-Output:
     jobs:
-      - install_aws_cli
-      - terraform_init:
-          requires:
-            - install_aws_cli
+      - terraform_init
       - terraform_plan:
-          requires:
+          requires :
             - terraform_init
-      - terraform_apply_output:
-          requires:
+      - terraform_apply_output :
+          requires :
             - terraform_plan
           filters:
-            branches:
-              only: dev
+             branches:
+                only: dev
