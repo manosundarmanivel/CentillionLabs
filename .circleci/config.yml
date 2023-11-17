@@ -21,9 +21,10 @@ jobs:
           command: mkdir -p /workspace/.aws
 
       - persist_to_workspace:
-          root: /workspace
+          root: /
           paths:
-            - .aws
+            - /usr/bin/aws
+            - ~/.aws
 
   
   terraform_init:
